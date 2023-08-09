@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<body>
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 offset-md-3 mt-2">
+					<div class=" myCard">
+						<div class="container text-center">
+     							<img style="width:70px;" th:src="@{/images/icon/SignUp.png}">
+     						</div>
+						<h1 class="text-center">Sign-Up Here !!</h1>
+						<form th:action="@{/doSignUp}" method="post" th:object="${user}">
+							<div class="form-group">
+    							<label for="name">Name</label>
+   							 	<input type="text" class="form-control" id="name" name="name" th:value="${user.name}" aria-describedby="emailHelp" required >
+     						</div>
+							<div class="form-group">
+    							<label for="email">Email</label>
+   							 	<input type="email" class="form-control" id="email" name="email" th:value="${user.email}" aria-describedby="emailHelp" required >
+     						</div>
+							<div class="form-group">
+    							<label for="password">Password</label>
+   							 	<input type="password" class="form-control" id="password" name="password"  aria-describedby="emailHelp" required >
+     						</div>
+							
+     						<div class="form-group mt-2">
+     							<textarea placeholder="Enter about yourself" rows="7" name="about" th:value="${user.about}" class="form-control"></textarea>
+     						</div>
+     						<div class="form-group text-center p-2">
+   							 	<input type="checkbox"  id="agreement" name="agreement"  aria-describedby="emailHelp" required >
+   							 	<label>Agree the terms and condition</label>
+     						</div>
+     						<div class="container text-center p-2">
+     							<button type="Submit" class="btn bg-green text-white" >Submit</button>
+     							<button type="Reset" class="btn btn-warning text-white" >Reset</button>
+     						</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
