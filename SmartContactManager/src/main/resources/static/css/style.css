@@ -1,3 +1,5 @@
+/*1. Sidebar*/
+
 body{
 	background : #e2e2e2 !important;
 }
@@ -20,4 +22,61 @@ body{
 .myCard{
 	padding: 20px;
 	background: white;
+}
+
+/*1. Sidebar Started*/
+
+@media only screen and (max-width: 1000px){
+	.sidebar{
+		display: none;
+	width: 80% !important;
+	height: 100vh;
+	background: white;
+	position: fixed;
+	padding-top: 20px; 
+	}
+	.content{
+	margin-left: 0% !important;
+	}
+}
+
+.sidebar{
+	width: 18%;
+	height: 100%;
+	background: white;
+	position: fixed;
+	padding-top: 20px; 
+}
+
+.sidebar a i{
+	margin-right: 5px;
+	}
+.sidebar a{
+	display: block;
+	width: 100%;
+	padding: 10px 25px;
+	color: gray;
+	text-decoration: none;
+}
+
+.sidebar a:hover{
+	background: #e2e2e2;
+}
+
+.sidebar .divider{
+	height: .5px;
+	width: 100%;
+	background: #e2e2e2;
+	margin-top: 10px;
+}
+
+.sidebar .crossBtn{
+	position: absolute;
+	top:0;
+	right: 35px;
+	font-size: 30px;
+	cursor: pointer;
+}
+.content{
+	margin-left: 20%;
 }

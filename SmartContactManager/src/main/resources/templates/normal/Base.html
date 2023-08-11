@@ -4,12 +4,12 @@
 	<title th:text="${title}"></title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 	
 	<!-- Navbar -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-green">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-green ">
   <a class="navbar-brand" href="#">Smart Contact Manager</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -21,14 +21,8 @@
         <a class="nav-link" th:href="@{/}">Home </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/about}">About</a>
-      </li>
-       <li class="nav-item active">
-        <a class="nav-link" th:href="@{/signIn}">Sign In </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/signUp}">SignUp</a>
-      </li>
+        <a class="nav-link" th:text="${userName}"></a>
+    
        <li class="nav-item active">
         <a class="nav-link" th:href="@{/logout}">LogOut</a>
       </li>
@@ -38,14 +32,26 @@
 </nav>
 <!--Navbar End -->
 
-
+   <!-- Side Bar Started -->
+   <div class="sidebar">
+      <span onclick="toggleSidebar()" class="crossBtn">&times</span>
+      <a th:href="@{/}"><i onclick="toggleSidebar()" class="fa-solid fa-house"></i>Home </a>
+      <a th:href="@{/}"><i class="fa-regular fa-address-book"></i>View Contact</a>
+      <a th:href="@{/Normal/addContact}"><i class="fa-regular fa-address-card"></i>Add Contact</a>
+      <a th:href="@{/}"><i class="fa-regular fa-user"></i>Your Profile</a>
+      <a th:href="@{/}"><i class="fa-solid fa-gear"></i>Setting</a>
+      <dir class="divider"></dir>
+   </div>
+   <!-- Side Bar End -->
 
 	<!--Main content -->
-	<div th:replace="${content}"></div>
-	<script type="text/javascript" src="/js/script.js"></script>
-	<script th:src="@{js/script.js}">
+	<div class="content">
+    <i onclick="toggleSidebar()" class="fas fa-bars m-3"></i>
+    <div th:replace="${content}"></div> 
+  </div>
+
+	<script type="text/javascript" src="../js/script.js"></script>
 	 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-	
 	
 </body>
 </html>

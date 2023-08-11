@@ -16,9 +16,10 @@ public class Contact {
 	private int cid;
 	private String name;
 	private String nickName;
-	private int phone;
+	private String phone;
 	private String work;
 	private String email;
+	@Column(nullable = true)
 	private String image;
 	@Column(length=500)
 	private String description;
@@ -40,10 +41,10 @@ public class Contact {
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 	public String getWork() {

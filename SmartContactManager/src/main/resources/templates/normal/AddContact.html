@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+
+<body>
+	<section>
+		<div class="myCard m-4 mt-0">
+     <div class="card-body">
+       <h1 class="text-center">Add Contact</h1>
+        <div class="container-fluid-mt-1">
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              
+                <form th:action="@{/Normal/saveContact}" method="POST" th:object="${contact}" enctype="multipart/form-data" class="mt-2">
+
+                  <div class="input-group flex-nowrap ">
+                    <div class="input-group-prepend ">
+                        <div class="input-group-text " id="addon-wrapping"><i class="fa fa-plus p-1"></i></div>
+                    </div>
+                    <input type="text" class="form-control" name="name" placeholder="Enter Name" aria-describedby="addon-wrapping">
+                  </div>
+                  
+                  <div class="input-group flex-nowrap mt-4">
+                    <div class="input-group-prepend ">
+                        <div class="input-group-text " id="addon-wrapping"><i class="fa fa-plus p-1"></i></div>
+                    </div>
+                    <input type="text" class="form-control " name="nickName" placeholder="Enter Nickname" aria-label="Nickname" aria-describedby="addon-wrapping">
+                  </div>
+                  
+                  <div class="input-group flex-nowrap mt-4">
+                    <div class="input-group-prepend ">
+                        <div class="input-group-text " id="addon-wrapping"><i class="fa fa-plus p-1"></i></div>
+                    </div>
+                    <input type="text" class="form-control" name="phone" placeholder="Enter Phone number"  aria-describedby="addon-wrapping">
+                  </div>
+                  
+                  <div class="input-group flex-nowrap mt-4">
+                    <div class="input-group-prepend ">
+                        <div class="input-group-text " id="addon-wrapping"><i class="fa fa-plus p-1"></i></div>
+                    </div>
+                    <input type="email" class="form-control" name="email" placeholder="Enter Email" aria-describedby="addon-wrapping">
+                  </div>
+
+                  <div class="input-group flex-nowrap mt-4">
+                    <div class="input-group-prepend ">
+                        <div class="input-group-text " id="addon-wrapping"><i class="fa fa-plus p-1"></i></div>
+                    </div>
+                    <input type="text" class="form-control" name="work" placeholder="Enter Work" aria-describedby="addon-wrapping">
+                  </div>
+                  
+                  <div class="form-group  mt-4">
+                    <textarea name="description" placeholder="Enter contact description" rows="5" class="form-control"></textarea>
+                  </div>
+
+                  <div class="custom-file mt-3">
+                    <input type="text" name="image" >
+                  </div>
+
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary">Save Contact</button>
+                  </div>
+
+                </form>
+
+            </div>
+          </div> 
+       </div>
+     </div>
+   </div>
+	</section>
+</body>
+</html>

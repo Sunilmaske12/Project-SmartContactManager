@@ -3,6 +3,7 @@ package SCM.SmartContactManager.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +13,7 @@ import SCM.SmartContactManager.UserRepository;
 import SCM.SmartContactManager.Entity.User;
 import SCM.SmartContactManager.Helper.Message;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class HomeController 
@@ -53,8 +55,14 @@ public class HomeController
 	}
 	
 	@PostMapping("/doSignUp")
-	public String doRegister(@ModelAttribute("user") User user, Model model, @RequestParam(value = "agreement", defaultValue="false") boolean agreement)
+	public String doRegister(@Valid @ModelAttribute("user") User user, Model model, @RequestParam(value = "agreement", defaultValue="false") boolean agreement,
+			BindingResult result)
 	{
+		if(result.hasErrors()) {
+			session.setAttribute("message", new Message("Something is missing !!", "alert-danger"));
+
+			return "redirect:/SignUp";
+		}
 		user.setRole("ROLE_USER");
 		user.setEnabled(true);
 		user.setImageUrl("Default.png");
