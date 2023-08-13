@@ -1,4 +1,4 @@
-package SCM.SmartContactManager;
+package SCM.SmartContactManager.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

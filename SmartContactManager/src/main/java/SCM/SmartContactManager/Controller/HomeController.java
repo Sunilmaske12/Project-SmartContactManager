@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import SCM.SmartContactManager.UserRepository;
 import SCM.SmartContactManager.Entity.User;
 import SCM.SmartContactManager.Helper.Message;
+import SCM.SmartContactManager.Repository.UserRepository;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
