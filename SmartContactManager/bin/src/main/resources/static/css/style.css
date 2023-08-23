@@ -1,9 +1,5 @@
 /*1. Sidebar*/
 
-h1,th{
-	text-transform: uppercase;
-}
-
 body{
 	background : #e2e2e2 !important;
 }
@@ -50,7 +46,6 @@ body{
 	background: white;
 	position: fixed;
 	padding-top: 20px; 
-	margin-top: 50px;
 }
 
 .sidebar a i{
@@ -62,7 +57,6 @@ body{
 	padding: 10px 25px;
 	color: gray;
 	text-decoration: none;
-	margin-top: 10px;
 }
 
 .sidebar a:hover{
@@ -97,22 +91,3 @@ body{
 	border : 1px solid black;
 
 }
-
-
-#navbar{
-	position: fixed;
-	width: 100%;
-	z-index: 1;
-}
-
-
-.contactDetailImage{
-	width: 250px;
-	border: 2px solid red;
-	border-radius: 50%;
-
-}
-
-.contactDetailImage table{
-	margin-top: 20px;
-	}

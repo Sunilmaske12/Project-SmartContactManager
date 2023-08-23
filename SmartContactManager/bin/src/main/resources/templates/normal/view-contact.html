@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+
+<body>
+	<section>
+		<div style="margin-right:20px" class="card">
+			<div class="card-body">
+				<h1 class="text-center">Your Contacts</h1>
+				
+				<table class="table">
+  <thead>
+    <tr class="table-dark">
+      <th scope="col">SrNo</th>
+      <th scope="col">Name</th>
+      <th scope="col">Nickname</th>
+      <th scope="col">Phone Number</th>
+       <th scope="col">Work</th>
+      <th scope="col">Email</th>
+       <th scope="col">Action</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="contacts, status : ${contacts}">
+      <th th:text="${status.index+1+(contactPerPage*currentPage)}"></th>
+      <td>
+		  <img class="customer-pic" th:src="@{'/images/Contacts/'+${contacts.image}}">
+		  <span  th:text="${contacts.name}"></span>
+	  </td>
+      <td th:text="${contacts.nickName}"></td>
+      <td th:text="${contacts.phone}"></td>
+      <td th:text="${contacts.work}"></td>
+      <td th:text="${contacts.email}"></td>
+      <td>
+      	<a th:href="@{'/Normal/deleteContact/'+${contacts.cid}}" type="button" class="btn btn-danger ">Delete</a>
+ 		<button type="button" class="btn btn-primary">Update</button>
+      </td>
+    </tr>   
+  </tbody>
+</table>
+		
+		<!-- Pagination -->
+		<nav aria-label="...">
+			  <ul class="pagination">
+			    <li class="page-item" th:if="${currentPage!=0}">
+			      <a class="page-link" href="#" tabindex="-1" aria-disabled="true" th:href="@{'/Normal/viewContact/'+${currentPage-1}}">Previous</a>
+			    </li>
+			    <li th:classappend="${currentPage==i-1?'active':''}" th:each="i : ${#numbers.sequence(1,totalPages)}" class="page-item"><a class="page-link" th:href="@{'/Normal/viewContact/'+${i-1}}"><span th:text="${i}"></span></a></li>
+			    <li class="page-item" th:if="${currentPage!=totalPages-1}">
+			      <a class="page-link" href="#" th:href="@{'/Normal/viewContact/'+${currentPage+1}}">Next</a>
+			    </li>
+			  </ul>
+		</nav>		
+
+			</div>
+		</div>
+ 
+	</section>
+</body>
+</html>

@@ -1,13 +1,11 @@
 package SCM.SmartContactManager.Controller;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
@@ -33,7 +31,7 @@ public class UserController {
 	
 	@Autowired
 	private ContactRepository contactRepository;
-	
+		
 	@ModelAttribute
 	public void commonData(Model model)
 	{
@@ -69,7 +67,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/saveContact")
-	public String saveContactInfo(@ModelAttribute("contact") Contact contact, @RequestParam("profileimage") MultipartFile file) throws IOException
+	public String saveContactInfo(@ModelAttribute("contact") Contact contact, @RequestParam("profileimage") MultipartFile file) 
 	{
 		//procession file
 		if(file.isEmpty()) 
@@ -78,17 +76,22 @@ public class UserController {
 		}
 		else
 		{
+			try {
 			contact.setImage(file.getOriginalFilename());
-			
-			File saveFile = new ClassPathResource("static/images/Contacts").getFile();
+			InputStream is= file.getInputStream();
+			File saveFile = new ClassPathResource("./static/images/Contacts").getFile();
 			
 			Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
 			
-			Files.copy(file.getInputStream(), path);
+			Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
 	//	System.out.println(file.getOriginalFilename());
 		contactRepository.save(contact);
-		return "redirect:addContact";
+		return "redirect:viewContact/0";
 	}
 	
 	@GetMapping("/deleteContact/{cid}")
@@ -98,12 +101,47 @@ public class UserController {
 		return "redirect:/Normal/viewContact/0";
 	}
 	
-	@PostMapping("/updateContact/{cid}")
-	public String updateContact(@ModelAttribute("cid") int cid)
+	
+	@GetMapping("/contactDetailPage/{cid}")
+	public String getcontactDetailPage(@PathVariable("cid") int cid, Model model)
 	{
-		Optional<Contact> contactById = contactRepository.findById(cid);
-		Contact contact = contactById.get();
-		return "redirect:/Normal/viewContact";
+		Contact contact= contactRepository.findById(cid).get();
+		model.addAttribute("contact", contact);
+		return "normal/contact-detail";
 	}
 	
+	@GetMapping("/contactUpdatePage/{cid}")
+	public String updateContactPage(@ModelAttribute("cid") int cid, Model model)
+	{
+		Contact contact  = contactRepository.findById(cid).get();
+		model.addAttribute("contact", contact);
+		return "normal/update-contact";
+	}
+
+	@PostMapping("/updateContact")
+	public String updateContact(@ModelAttribute Contact contact, @RequestParam("profileimage") MultipartFile file) 
+	{
+		
+		if(!file.isEmpty()) 
+		{
+			System.out.println("in a block");
+			try {
+			contact.setImage(file.getOriginalFilename());
+			InputStream is= file.getInputStream();
+			File saveFile = new ClassPathResource("./static/images/Contacts").getFile();
+			
+			Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
+			
+			Files.copy(is, path, StandardCopyOption.REPLACE_EXISTING);
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+
+		contactRepository.save(contact);
+		
+		return "redirect:contactDetailPage/"+contact.getCid();
+	}
 }

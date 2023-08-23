@@ -66,10 +66,15 @@ public class Contact {
 		this.image = image;
 	}
 	public String getDescription() {
-		return description;
+		return this.description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	@Override
+	public String toString() {
+		return "Contact [cid=" + cid + ", name=" + name + ", nickName=" + nickName + ", phone=" + phone + ", work="
+				+ work + ", email=" + email + ", image=" + image + ", description=" + description + "]";
 	}
 	
 	

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}">
+<html xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
 <head>
 	<title>Home</title>
 </head>
@@ -11,7 +11,5 @@
 		<a th:href="@{/Normal/index}" class="btn bg-green text-white">Get Started</a>
 		<div>
 	</section>
-	
-	
 </body>
 </html>
