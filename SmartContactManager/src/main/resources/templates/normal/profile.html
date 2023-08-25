@@ -3,10 +3,10 @@
 
 <body>
 	<section th:object="${user}">
-		<div class="myCard m-4 mt-0">
+	<div class="myCard m-4 ">
      <div class="card-body">
         <div class="container-fluid-mt-1 text-center">
-			<img th:src="@{/images/Contacts/contact.png}" class="userProfile">
+			<img th:src="@{'/images/user/'+${user.imageUrl}}" class="userProfile">
          <h3 class="text-center" th:text="${user.name}">User name</h3>
         <div class="row m-4" >
             <div class="col-md-10 offset-md-1">
@@ -41,6 +41,9 @@
        </div>
      </div>
    </div>
+   <script>	
+			$("#profile-link").addClass("active");					
+		</script>
 	</section>
 	
 </body>

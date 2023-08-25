@@ -26,13 +26,13 @@
         <a class="nav-link" th:href="@{/about}">About</a>
       </li>
        <li class="nav-item active">
-        <a class="nav-link" th:href="@{/signIn}">Sign In </a>
+        <a class="nav-link" th:if="${userName==null}" th:href="@{/signIn}">Sign In </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/signUp}">SignUp</a>
+        <a class="nav-link"  th:href="@{/signUp}">SignUp</a>
       </li>
        <li class="nav-item active">
-        <a class="nav-link" th:href="@{/logout}">LogOut</a>
+        <a class="nav-link"  th:if="${userName!=null}" th:href="@{/logout}">LogOut</a>
       </li>
      </ul>
    

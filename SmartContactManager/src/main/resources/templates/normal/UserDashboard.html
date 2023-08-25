@@ -3,9 +3,19 @@
 
 <body>
 	<section>
-		<div class="text-center">
-		<h1>In a Dashboards file</h1>
-		<div>
+		<div class="myCard m-4 p-4">
+     <div class="card-body">
+        <div class="container-fluid-mt-1 text-center">
+			<div>
+				<img th:src="@{/images/Contacts/contact.png}" class="dashboard-image">
+			</div>
+			<div class="p-2">
+				<I style="font-size: 23px;">Start Adding Your Contacts On The Cloud</I>
+			</div>
+			<a  th:href="@{/Normal/addContact}" class=" btn btn-primary m-1  text-center" style="width: 80%; font-weight: bold; border-radius: 5px;">Add New Contacts</a>	
+       </div>
+     </div>
+   </div>
 		
 		<script>	
 			$("#home-link").addClass("active");					

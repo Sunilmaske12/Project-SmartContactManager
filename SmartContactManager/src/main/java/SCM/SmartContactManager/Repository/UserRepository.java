@@ -6,4 +6,6 @@ import SCM.SmartContactManager.Entity.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+	User getUserByEmail(String username);
+
 }

@@ -11,7 +11,10 @@
             <div class="col-md-12">
               
                 <form th:action="@{/Normal/changePassword}" method="POST" class="m-2 p-2">
-
+					<div th:if="${session.message}" th:classappend="${session.message.type}" class="alert alert-success" role="alert" >
+							<span th:text="${session.message.content}"></span>
+							<span th:text="${@removeSession.removeMessage()}"></span>
+						</div>
                   <div class="input-group flex-nowrap p-2">     
                     <input type="text" class="form-control" name="oldPassword" placeholder="Enter old password" aria-describedby="addon-wrapping">
                   </div>

@@ -113,6 +113,12 @@ body{
 
 }
 
+ .dashboard-image, .userProfile{
+	width: 200px;
+	border: 2px solid darkblue;
+	border-radius: 50%;
+}
+
 .contactDetailImage table{
 	margin-top: 20px;
 	}

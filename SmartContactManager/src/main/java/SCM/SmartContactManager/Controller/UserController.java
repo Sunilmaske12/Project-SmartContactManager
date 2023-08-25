@@ -12,6 +12,9 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +27,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import SCM.SmartContactManager.Entity.Contact;
 import SCM.SmartContactManager.Entity.User;
+import SCM.SmartContactManager.Helper.Message;
 import SCM.SmartContactManager.Repository.ContactRepository;
 import SCM.SmartContactManager.Repository.UserRepository;
+import SCM.SmartContactManager.config.CustomUserDetails;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/Normal")
@@ -36,11 +43,18 @@ public class UserController {
 	
 	@Autowired
 	private UserRepository userRepository;
-		
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+	
+	@Autowired
+	private HttpSession session;
+	
+			
 	@ModelAttribute
-	public void commonData(Model model)
+	public void commonData(Model model, @AuthenticationPrincipal UserDetails user)
 	{
-		model.addAttribute("userName", "User_Name");
+		model.addAttribute("userName", user.getUsername());
 	}
 	
 	@GetMapping("/index")
@@ -59,12 +73,12 @@ public class UserController {
 	}
 	
 	@GetMapping("/viewContact/{page}")
-	public String showContactWithPagination(Model model, @PathVariable("page") int page)
+	public String showContactWithPagination(Model model, @PathVariable("page") int page, @AuthenticationPrincipal CustomUserDetails user)
 	{
 		int contactPerPage =2;
 		Pageable pagable = PageRequest.of(page, contactPerPage); //page == current page number, 2 == contacts per page
 		
-		Page<Contact> contact = contactRepository.findAll(pagable);
+		Page<Contact> contact = contactRepository.findAllByUserId(user.getId(), pagable);
 		model.addAttribute("contacts", contact);
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", contact.getTotalPages());
@@ -74,7 +88,7 @@ public class UserController {
 	}
 	
 	@PostMapping("/saveContact")
-	public String saveContactInfo(@ModelAttribute("contact") Contact contact, @RequestParam("profileimage") MultipartFile file) 
+	public String saveContactInfo(@ModelAttribute("contact") Contact contact, @RequestParam("profileimage") MultipartFile file,  @AuthenticationPrincipal CustomUserDetails user)
 	{
 		//procession file
 		if(file.isEmpty()) 
@@ -96,7 +110,8 @@ public class UserController {
 				e.printStackTrace();
 			}
 		}
-	//	System.out.println(file.getOriginalFilename());
+		
+		contact.setUser(userRepository.findById(user.getId()).get());
 		contactRepository.save(contact);
 		return "redirect:viewContact/0";
 	}
@@ -166,5 +181,29 @@ public class UserController {
 		User user = userRepository.findById(1).get();
 		model.addAttribute("user", user);
 		return "normal/profile";
+	}
+	
+	@PostMapping("/changePassword")
+	public String changePassword(HttpServletRequest req,  @AuthenticationPrincipal CustomUserDetails userDetail) {
+		String oldPass = req.getParameter("oldPassword");
+		String newPass = req.getParameter("newPassword");
+		
+		
+			if(encoder.matches(oldPass, userDetail.getPassword())) {
+				User user=userRepository.findById(userDetail.getId()).get();
+				user.setPassword(encoder.encode(newPass));
+				userRepository.save(user);
+				session.setAttribute("message",  new Message("Password change succefully" , "alert-sucess"));
+				System.out.println("change");
+				return "redirect:setting";
+			}
+			else {
+				session.setAttribute("message",  new Message("Please enter currect old password", "alert-danger"));
+				System.out.println("not change");
+				return "redirect:setting";
+			}
+			
+		
+		
 	}
 }
