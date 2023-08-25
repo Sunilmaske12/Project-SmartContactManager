@@ -23,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import SCM.SmartContactManager.Entity.Contact;
+import SCM.SmartContactManager.Entity.User;
 import SCM.SmartContactManager.Repository.ContactRepository;
+import SCM.SmartContactManager.Repository.UserRepository;
 
 @Controller
 @RequestMapping("/Normal")
@@ -31,6 +33,9 @@ public class UserController {
 	
 	@Autowired
 	private ContactRepository contactRepository;
+	
+	@Autowired
+	private UserRepository userRepository;
 		
 	@ModelAttribute
 	public void commonData(Model model)
@@ -49,6 +54,7 @@ public class UserController {
 	public String addContact(Model model)
 	{
 		model.addAttribute("contact", new Contact());
+		model.addAttribute("title", "Add-Contact");
 		return "normal/AddContact";
 	}
 	
@@ -63,6 +69,7 @@ public class UserController {
 		model.addAttribute("currentPage", page);
 		model.addAttribute("totalPages", contact.getTotalPages());
 		model.addAttribute("contactPerPage", contactPerPage);
+		model.addAttribute("title", "View-Contact");
 		return "normal/view-contact";
 	}
 	
@@ -107,6 +114,7 @@ public class UserController {
 	{
 		Contact contact= contactRepository.findById(cid).get();
 		model.addAttribute("contact", contact);
+		model.addAttribute("title", "Contact-Detail");
 		return "normal/contact-detail";
 	}
 	
@@ -115,6 +123,7 @@ public class UserController {
 	{
 		Contact contact  = contactRepository.findById(cid).get();
 		model.addAttribute("contact", contact);
+		model.addAttribute("title", "Update-Contact");
 		return "normal/update-contact";
 	}
 
@@ -143,5 +152,19 @@ public class UserController {
 		contactRepository.save(contact);
 		
 		return "redirect:contactDetailPage/"+contact.getCid();
+	}
+	
+	@GetMapping("/setting")
+	public String settingPage(Model model) {
+		model.addAttribute("title", "Setting");
+		return "normal/setting";
+	}
+	
+	@GetMapping("/myProfile")
+	public String getprofilePage(Model model)
+	{
+		User user = userRepository.findById(1).get();
+		model.addAttribute("user", user);
+		return "normal/profile";
 	}
 }

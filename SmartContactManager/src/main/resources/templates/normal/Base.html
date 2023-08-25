@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+	<script src="https://code.jquery.com/jquery-3.7.0.slim.min.js" ></script>
 </head>
 <body>
 	<div>
@@ -35,11 +37,11 @@
    <!-- Side Bar Started -->
    <div class="sidebar">
       <span onclick="toggleSidebar()" class="crossBtn">&times</span>
-      <a th:href="@{/}"><i onclick="toggleSidebar()" class="fa-solid fa-house"></i>Home </a>
-      <a th:href="@{/Normal/viewContact/0}"><i class="fa-regular fa-address-book"></i>View Contact</a>
-      <a th:href="@{/Normal/addContact}"><i class="fa-regular fa-address-card"></i>Add Contact</a>
-      <a th:href="@{/}"><i class="fa-regular fa-user"></i>Your Profile</a>
-      <a th:href="@{/}"><i class="fa-solid fa-gear"></i>Setting</a>
+      <a id="home-link"  th:href="@{/Normal/index}"><i onclick="toggleSidebar()" class="fa-solid fa-house"></i>Home </a>
+      <a id="view-contact-link" th:href="@{/Normal/viewContact/0}"><i class="fa-regular fa-address-book"></i>View Contact</a>
+      <a id="add-contact-link"  th:href="@{/Normal/addContact}"><i class="fa-regular fa-address-card"></i>Add Contact</a>
+      <a id="profile-link"  th:href="@{/Normal/myProfile}"><i class="fa-regular fa-user"></i>Your Profile</a>
+      <a id="setting-link"  th:href="@{/Normal/setting}"><i class="fa-solid fa-gear"></i>Setting</a>
       <dir class="divider"></dir>
    </div>
    <!-- Side Bar End -->

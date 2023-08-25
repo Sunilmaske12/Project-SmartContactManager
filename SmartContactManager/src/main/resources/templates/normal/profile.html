@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{normal/base::layout(~{::section})}">
+
+<body>
+	<section th:object="${user}">
+		<div class="myCard m-4 mt-0">
+     <div class="card-body">
+        <div class="container-fluid-mt-1 text-center">
+			<img th:src="@{/images/Contacts/contact.png}" class="userProfile">
+         <h3 class="text-center" th:text="${user.name}">User name</h3>
+        <div class="row m-4" >
+            <div class="col-md-10 offset-md-1">
+              <div class="table-responsive">
+                <table class="table">
+						<tbody>
+						<tr>
+							<th scope="col">#ID</th>
+							<th scope="col" th:text="${user.id}"></th>
+							
+						</tr>
+				
+						<tr>
+							<th >Email</th>
+							<td th:text="${user.email}"></td>
+						</tr>					
+						<tr>
+							<th >Role</th>
+							<td th:text="${user.role}"></td>
+						</tr>					
+						<tr>
+							<th >About</th>
+							<td th:text="${user.about}"></td>
+						</tr>					
+								
+					</tbody>
+				</table>
+				</div>
+			
+            </div>
+          </div> 
+       </div>
+     </div>
+   </div>
+	</section>
+	
+</body>
+</html>

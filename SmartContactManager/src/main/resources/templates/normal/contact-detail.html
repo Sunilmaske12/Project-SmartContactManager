@@ -10,7 +10,7 @@
          <h3 class="text-center" th:text="${contact.name}+'('+${contact.nickName}+')'">Contact name</h3>
         <div class="row m-4" >
             <div class="col-md-10 offset-md-1">
-              
+              <div class="table-responsive">
                 <table class="table">
 						<tbody>
 						<tr>
@@ -34,8 +34,9 @@
 								
 					</tbody>
 				</table>
+				</div>
 				<button th:onclick="'deleteContact('+${contact.cid}+')'" type="button" class="btn-danger m-1 text-center" style="width: 100%; height: 30px; border-radius: 5px;">Delete</button>
-				<a th:href="@{'/Normal/contactUpdatePage/'+${contact.cid}}" type="button" class="btn-primary m-1 text-center" style="width: 100%;height: 30px; border-radius: 5px;">Update</a>
+				<a th:href="@{'/Normal/contactUpdatePage/'+${contact.cid}}" type="button" class="btn btn-primary m-1 text-center p-1" style="width: 100%;height: 30px; border-radius: 5px;">Update</a>
 
             </div>
           </div> 
@@ -43,5 +44,6 @@
      </div>
    </div>
 	</section>
+	
 </body>
 </html>
